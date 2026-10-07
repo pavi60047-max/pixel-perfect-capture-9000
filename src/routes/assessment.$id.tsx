@@ -65,8 +65,8 @@ function Assessment() {
           <div className="mt-4 grid place-items-center"><ScoreRing value={f} size={200} label="50% match + 50% quiz" /></div>
           <p className="mt-4 text-lg font-semibold text-brand2">{recommendation(f)}</p>
           <div className="mt-8 grid gap-3 md:grid-cols-4">
-            {[["Resume Match", `${c.match}%`], ["Quiz Score", `${c.quiz / 10} / 10 · ${c.quiz}%`], ["Integrity", c.integrity], ["Final Score", `${f}%`]].map(([a, b]) => (
-              <div key={a} className="rounded-2xl border border-border bg-muted p-4"><div className="text-xs text-muted-foreground">{a}</div><div className="mt-1 text-xl font-bold">{a === "Integrity" ? <IntegrityTag i={b} /> : b}</div></div>
+            {([["Resume Match", `${c.match}%`], ["Quiz Score", `${c.quiz / 10} / 10 · ${c.quiz}%`], ["Integrity", c.integrity], ["Final Score", `${f}%`]] as [string, string][]).map(([a, b]) => (
+              <div key={a} className="rounded-2xl border border-border bg-muted p-4"><div className="text-xs text-muted-foreground">{a}</div><div className="mt-1 text-xl font-bold">{a === "Integrity" ? <IntegrityTag i={b ?? ""} /> : b}</div></div>
             ))}
           </div>
           <div className="mt-8 flex justify-center gap-3">
@@ -93,7 +93,7 @@ function Assessment() {
     </section>
   );
 
-  const q = quiz[i];
+  const q = quiz[i]!;
   const answered = ans.filter((a) => a != null).length;
   const flagged = events.length >= 2;
   return (

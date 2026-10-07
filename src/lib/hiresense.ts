@@ -88,7 +88,7 @@ const seedJobs: Job[] = [
 ];
 const mk = (id: string, name: string, jobId: string, skills: string[], quiz: number | null, integrity: Integrity, status: Status): Candidate => {
   const job = seedJobs.find((j) => j.id === jobId)!;
-  return { id, name, email: `${name.split(" ")[0].toLowerCase()}@mail.com`, jobId, skills, education: ["B.Tech Computer Science"], experience: ["Software intern, 6 months"], projects: ["Full-stack project portfolio"], certifications: [], ...computeMatch(skills, job.skills), quiz, integrity, events: integrity === "Flagged" ? ["Left assessment tab", "Exited fullscreen"] : [], status, resumeName: `${name.split(" ")[0]}_Resume.pdf` };
+  return { id, name, email: `${name.split(" ")[0]!.toLowerCase()}@mail.com`, jobId, skills, education: ["B.Tech Computer Science"], experience: ["Software intern, 6 months"], projects: ["Full-stack project portfolio"], certifications: [], ...computeMatch(skills, job.skills), quiz, integrity, events: integrity === "Flagged" ? ["Left assessment tab", "Exited fullscreen"] : [], status, resumeName: `${name.split(" ")[0]}_Resume.pdf` };
 };
 const seed = (): State => ({
   jobs: seedJobs,

@@ -46,7 +46,7 @@ function Analyze() {
       const skills = extractSkills(text);
       const job = jobs.find((j) => j.id === jobId);
       const required = jobId === "custom" ? extractSkills(custom) : job?.skills ?? [];
-      const c: Candidate = { id: uid(), name, email, jobId: jobId === "custom" ? jobs[0]?.id : jobId, skills, ...extractSections(text),
+      const c: Candidate = { id: uid(), name, email, jobId: jobId === "custom" ? (jobs[0]?.id ?? "") : jobId, skills, ...extractSections(text),
         ...computeMatch(skills, required), quiz: null, integrity: "Pending", events: [], status: "Assessment Pending", resumeName: file.name };
       actions.addCandidate(c); setResult(c);
     } catch { setErr("Could not read this PDF. Try another file."); }
